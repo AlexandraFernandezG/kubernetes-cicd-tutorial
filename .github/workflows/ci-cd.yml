@@ -39,7 +39,9 @@ jobs:
           rm -rf gitops
           
           # Clone repository using HTTPS URL without token
-          git clone https://github.com/alexandrafernandezg/grade-api-gitops.git gitops
+          $owner = "${{ github.repository_owner }}".ToLower()
+          echo "REPO_OWNER=$owner" >> $env:GITHUB_ENV
+          git clone https://github.com/$owner/grade-api-gitops.git gitops
           cd gitops
           
           if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -55,4 +57,4 @@ jobs:
           git commit -m "Update image to ${{ github.sha }}"
           
           # Push
-          git push -f https://${GIT_TOKEN}@github.com/alexandrafernandezg/grade-api-gitops.git main
+          git push -f https://${GIT_TOKEN}@github.com/$owner/grade-api-gitops.git main
