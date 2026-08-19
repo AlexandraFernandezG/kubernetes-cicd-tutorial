@@ -19,7 +19,6 @@ jobs:
           password: ${{ secrets.CR_PAT }}
 
       - name: Set lowercase repo name
-        shell: pwsh
         run: |
           $repo = "${{ github.repository }}".ToLower()
           echo "IMAGE_REPO=$repo" >> $env:GITHUB_ENV
